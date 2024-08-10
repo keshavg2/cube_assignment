@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 const PhotoGrid: React.FC = () => {
     const [photos, setPhotos] = useState<string[]>([]);
     const [page, setPage] = useState(1);
-    const loadPhotos = async () => {
-        const newPhotos = await fetchPhotos(9);
-        setPhotos(newPhotos);
-    };
 
     useEffect(() => {
+        const loadPhotos = async () => {
+            const newPhotos = await fetchPhotos(9);
+            setPhotos(newPhotos);
+        };
+
         loadPhotos();
         const intervalId = setInterval(() => {
             setPage(prevPage => prevPage + 1);
             loadPhotos();
         }, 10000);
         return () => clearInterval(intervalId);
-        console.log(page);
     }, [page]);
 
     const fetchPhotos = async (count: number): Promise<string[]> => {
@@ -26,8 +26,8 @@ const PhotoGrid: React.FC = () => {
 
     return (
         <div className="photo-grid">
-            {photos.map((photo, index) => (
-                <img key={index} src={photo} alt={`Photo ${index + 1}`} />
+            {photos.map((customer, index) => (
+                <img key={index} src={customer} alt={`Customer ${index + 1}`} />
             ))}
         </div>
     );

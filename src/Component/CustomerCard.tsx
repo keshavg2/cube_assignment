@@ -12,7 +12,6 @@ const CustomerCard: React.FC<CustomerCardProps> = ({ id, name, title, selected, 
     return (
         <div onClick={onClick} className={`customer-card ${selected ? 'selected' : ''}`}>
             <h3>{title} {name}</h3>
-            <h5></h5>
         </div>
     );
 };
