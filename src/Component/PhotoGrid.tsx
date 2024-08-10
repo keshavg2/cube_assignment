@@ -6,6 +6,12 @@ const PhotoGrid: React.FC = () => {
 
     useEffect(() => {
         const loadPhotos = async () => {
+            const fetchPhotos = async (count: number): Promise<string[]> => {
+                const response = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=${count}`);
+                const data = await response.json();
+                return data.map((item: { download_url: string }) => item.download_url);
+            };
+
             const newPhotos = await fetchPhotos(9);
             setPhotos(newPhotos);
         };
@@ -18,21 +24,13 @@ const PhotoGrid: React.FC = () => {
         return () => clearInterval(intervalId);
     }, [page]);
 
-    const fetchPhotos = async (count: number): Promise<string[]> => {
-        const response = await fetch(`https://picsum.photos/v2/list?page=${page}&limit=${count}`);
-        const data = await response.json();
-        return data.map((item: { download_url: string }) => item.download_url);
-    };
-
     return (
         <div className="photo-grid">
-            {photos.map((customer, index) => (
-                <img key={index} src={customer} alt={`Customer ${index + 1}`} />
+            {photos.map((photo, index) => (
+                <img key={index} src={photo} alt={`Photo ${index + 1}`} />
             ))}
         </div>
     );
 };
 
 export default PhotoGrid;
-export {};
-
