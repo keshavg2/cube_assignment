@@ -27,7 +27,7 @@ const PhotoGrid: React.FC = () => {
     return (
         <div className="photo-grid">
             {photos.map((photo, index) => (
-                <img key={index} src={photo} alt={`Photo ${index + 1}`} />
+                <img key={index} src={photo} alt={`Customer ${index + 1}`} />
             ))}
         </div>
     );
